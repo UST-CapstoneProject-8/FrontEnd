@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  let location = useLocation();
   let navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
@@ -63,8 +64,13 @@ const Login = () => {
           // Store in localStorage
           localStorage.setItem("username", username);
           localStorage.setItem("token", token);
+          localStorage.setItem("user", "authenticated"); // Mock authentication
 
-        navigate("/dashboard");
+          // Redirect to the original page or fallback to home
+          console.log(location.state?.from?.pathname );
+          const redirectTo = location.state?.from?.pathname || "/dashboard"; 
+          navigate(redirectTo, { replace: true });
+        // navigate("/dashboard");
         }
 
       } catch (error) {

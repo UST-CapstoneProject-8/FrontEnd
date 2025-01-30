@@ -3,9 +3,10 @@ import './App.css'
 import { LandingPage } from './components/LandingPage'
 import Login from './components/Login'
 import Register from './components/Register'
-import { UserDashboard } from './components/UserDashBoard'
+import { UserDashBoard } from './components/UserDashBoard'
 import { CarListings } from './components/CarListings'
-
+import ProtectedRoute from './components/ProtectedRoute'
+import Profile from './components/Profile'
 
 function App() {
   return (
@@ -17,9 +18,11 @@ function App() {
         {/* Main routes */}
         <Route path="/home" element={<LandingPage />} />
         
-        <Route path="/dashboard" element={<UserDashboard/>} />
+        <Route path="/dashboard" element={<ProtectedRoute><UserDashBoard/></ProtectedRoute>} />
 
         <Route path="/login" element={<Login/>}/>
+
+        <Route path="/profile" element={<Profile/>}/>
 
         <Route path="/register" element ={<Register/>}/>
         
